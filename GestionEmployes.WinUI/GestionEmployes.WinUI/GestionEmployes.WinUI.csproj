@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.4" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GestionEmployes.DataAccess\GestionEmployes.DataAccess.csproj" />
+    <ProjectReference Include="..\..\GestionEmployes.ViewModels\GestionEmployes.ViewModels.csproj" />
+  </ItemGroup>
 </Project>

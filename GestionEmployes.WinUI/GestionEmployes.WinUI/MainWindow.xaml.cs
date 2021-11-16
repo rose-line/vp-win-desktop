@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿using GestionEmployes.DataAccess;
+using GestionEmployes.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -26,11 +28,17 @@ namespace GestionEmployes.WinUI
     public MainWindow()
     {
       this.InitializeComponent();
+
+      ViewModel = new MainViewModel(new EmployeDataProvider());
+
+      Activated += MainWindow_Activated;
     }
 
-    private void myButton_Click(object sender, RoutedEventArgs e)
+    private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
-      myButton.Content = "Clicked";
+      ViewModel.Charger();
     }
+
+    public MainViewModel ViewModel { get; }
   }
 }
