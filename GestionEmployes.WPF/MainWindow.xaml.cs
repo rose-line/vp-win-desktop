@@ -23,9 +23,5 @@ namespace GestionEmployes.WPF
       _viewModel.Charger();
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
   }
 }

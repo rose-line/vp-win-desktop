@@ -1,5 +1,6 @@
 ﻿using GestionEmployes.Common.Interfaces;
 using GestionEmployes.Common.Model;
+using GestionEmployes.ViewModels.Commands;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -16,9 +17,11 @@ namespace GestionEmployes.ViewModels
     {
       _employeDataProvider = employeDP;
       Employes = new();
+      ChargerCmd = new DelegateCommand(Charger);
     }
 
     public ObservableCollection<EmployeViewModel> Employes { get; }
+    public DelegateCommand ChargerCmd { get; }
     public ObservableCollection<Role> Roles { get; } = new();
 
     public EmployeViewModel EmployeSelectionne
@@ -31,6 +34,7 @@ namespace GestionEmployes.ViewModels
           employeSelectionne = value;
           RaisePropertyChanged();
           RaisePropertyChanged(nameof(PeutAfficherDetails));
+
         }
       }
     }

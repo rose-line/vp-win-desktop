@@ -1,5 +1,6 @@
 ﻿using GestionEmployes.Common.Interfaces;
 using GestionEmployes.Common.Model;
+using GestionEmployes.ViewModels.Commands;
 using System;
 
 namespace GestionEmployes.ViewModels
@@ -9,12 +10,16 @@ namespace GestionEmployes.ViewModels
     private Employe _employe;
     private IEmployeDataProvider _employeDataProvider;
 
+
     public EmployeViewModel(Employe employe, IEmployeDataProvider employeDP)
     {
       _employe = employe;
       _employeDataProvider = employeDP;
+      SauvegarderCmd = new DelegateCommand(Sauvegarder, () => PeutSauvegarder);
     }
 
+    public DelegateCommand SauvegarderCmd { get; }
+    
     public string Prenom
     {
       get => _employe.Prenom;
@@ -25,6 +30,7 @@ namespace GestionEmployes.ViewModels
           _employe.Prenom = value;
           RaisePropertyChanged();
           RaisePropertyChanged(nameof(PeutSauvegarder));
+          SauvegarderCmd.RaiseCanExecuteChanged();
         }
       }
     }
@@ -34,11 +40,12 @@ namespace GestionEmployes.ViewModels
       get => _employe.Nom;
       set
       {
-        if (_employe.Prenom != value)
+        if (_employe.Nom != value)
         {
           _employe.Nom = value;
           RaisePropertyChanged();
           RaisePropertyChanged(nameof(PeutSauvegarder));
+          SauvegarderCmd.RaiseCanExecuteChanged();
         }
       }
     }

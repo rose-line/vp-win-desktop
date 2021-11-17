@@ -25,7 +25,8 @@
     </Border>
 
     <StackPanel Grid.Row="1">
-      <Button Content="Rafraîchir" Margin="10"/>
+      <Button Content="Rafraîchir" Margin="10"
+              Command="{Binding ChargerCmd}"/>
       <ListView ItemsSource="{Binding Employes}"
                 SelectedItem="{Binding EmployeSelectionne,
                                 Mode=TwoWay}"
@@ -73,7 +74,7 @@
                 IsChecked="{Binding EmployeSelectionne.EstPiloteDeLigne,
                             Mode=TwoWay}"/>
       <Button Grid.Row="9" Content="Sauvegarder" Margin="10 10 10 30"
-              IsEnabled="{Binding EmployeSelectionne.PeutSauvegarder, Mode=OneWay}"
+              Command="{Binding EmployeSelectionne.SauvegarderCmd}"
               VerticalAlignment="Bottom" HorizontalAlignment="Left" />
     </Grid>
 
