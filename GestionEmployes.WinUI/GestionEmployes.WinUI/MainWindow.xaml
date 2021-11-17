@@ -61,12 +61,16 @@
                   SelectedDate="{x:Bind ViewModel.EmployeSelectionne.DateEmbauche,
                                 Mode=TwoWay}"
                   Margin="10" />
-      <ComboBox Grid.Row="3" Header="Rôle" Margin="10"/>
+      <ComboBox Grid.Row="3" Header="Rôle" Margin="10"
+                ItemsSource="{x:Bind ViewModel.Roles,Mode=OneWay}"
+                DisplayMemberPath="Nom"
+                SelectedValuePath="Id"
+                SelectedValue="{x:Bind ViewModel.EmployeSelectionne.RoleId, Mode=TwoWay}"/>
       <CheckBox Grid.Row="4" Content="Pilote de ligne" Margin="10"
                 IsChecked="{x:Bind ViewModel.EmployeSelectionne.EstPiloteDeLigne,
                             Mode=TwoWay}"/>
       <Button Grid.Row="5" Content="Sauvegarder" Margin="10 10 10 30"
-              IsEnabled="{x:Bind ViewModel.EmployeSelectionne.PeutSauvegarder}"
+              IsEnabled="{x:Bind ViewModel.EmployeSelectionne.PeutSauvegarder, Mode=OneWay}"
               Click="{x:Bind ViewModel.EmployeSelectionne.Sauvegarder}"
               VerticalAlignment="Bottom" HorizontalAlignment="Left" />
     </Grid>

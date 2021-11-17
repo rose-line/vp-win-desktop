@@ -15,19 +15,17 @@ namespace GestionEmployes.ViewModels
       _employeDataProvider = employeDP;
     }
 
-    public void Sauvegarder()
-    {
-      _employeDataProvider.SauvegarderEmploye(_employe);
-    }
-
     public string Prenom
     {
       get => _employe.Prenom;
       set
       {
-        _employe.Prenom = value;
-        RaisePropertyChanged();
-        RaisePropertyChanged(nameof(PeutSauvegarder));
+        if (_employe.Nom != value)
+        {
+          _employe.Prenom = value;
+          RaisePropertyChanged();
+          RaisePropertyChanged(nameof(PeutSauvegarder));
+        }
       }
     }
 
@@ -36,9 +34,12 @@ namespace GestionEmployes.ViewModels
       get => _employe.Nom;
       set
       {
-        _employe.Nom = value;
-        RaisePropertyChanged();
-        RaisePropertyChanged(nameof(PeutSauvegarder));
+        if (_employe.Prenom != value)
+        {
+          _employe.Nom = value;
+          RaisePropertyChanged();
+          RaisePropertyChanged(nameof(PeutSauvegarder));
+        }
       }
     }
 
@@ -47,8 +48,11 @@ namespace GestionEmployes.ViewModels
       get => _employe.DateEmbauche;
       set
       {
-        _employe.DateEmbauche = value;
-        RaisePropertyChanged();
+        if (_employe.DateEmbauche != value)
+        {
+          _employe.DateEmbauche = value;
+          RaisePropertyChanged();
+        }
       }
     }
 
@@ -57,8 +61,11 @@ namespace GestionEmployes.ViewModels
       get => _employe.RoleId;
       set
       {
-        _employe.RoleId = value;
-        RaisePropertyChanged();
+        if (_employe.RoleId != value)
+        {
+          _employe.RoleId = value;
+          RaisePropertyChanged();
+        }
       }
     }
 
@@ -67,13 +74,20 @@ namespace GestionEmployes.ViewModels
       get => _employe.EstPiloteDeLigne;
       set
       {
-        _employe.EstPiloteDeLigne = value;
-        RaisePropertyChanged();
+        if (_employe.EstPiloteDeLigne != value)
+        {
+          _employe.EstPiloteDeLigne = value;
+          RaisePropertyChanged();
+        }
       }
     }
 
     public bool PeutSauvegarder => !string.IsNullOrWhiteSpace(Prenom)
                                     && !string.IsNullOrWhiteSpace(Nom);
 
+    public void Sauvegarder()
+    {
+      _employeDataProvider.SauvegarderEmploye(_employe);
+    }
   }
 }

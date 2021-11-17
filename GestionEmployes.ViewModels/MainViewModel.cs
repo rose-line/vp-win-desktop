@@ -1,4 +1,5 @@
 ﻿using GestionEmployes.Common.Interfaces;
+using GestionEmployes.Common.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -17,6 +18,7 @@ namespace GestionEmployes.ViewModels
     }
 
     public ObservableCollection<EmployeViewModel> Employes { get; }
+    public ObservableCollection<Role> Roles { get; } = new();
 
     public EmployeViewModel EmployeSelectionne
     {
@@ -34,11 +36,19 @@ namespace GestionEmployes.ViewModels
     public void Charger()
     {
       var employes = _employeDataProvider.ChargerEmployes();
+      var roles = _employeDataProvider.ChargerRoles();
+
 
       Employes.Clear();
       foreach (var employe in employes)
       {
         Employes.Add(new EmployeViewModel(employe, _employeDataProvider));
+      }
+
+      Roles.Clear();
+      foreach (var jobRole in roles)
+      {
+        Roles.Add(jobRole);
       }
     }
   }
