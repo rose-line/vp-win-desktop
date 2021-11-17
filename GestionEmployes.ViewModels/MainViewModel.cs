@@ -3,6 +3,7 @@ using GestionEmployes.Common.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace GestionEmployes.ViewModels
 {
@@ -29,15 +30,17 @@ namespace GestionEmployes.ViewModels
         {
           employeSelectionne = value;
           RaisePropertyChanged();
+          RaisePropertyChanged(nameof(PeutAfficherDetails));
         }
       }
     }
+
+    public bool PeutAfficherDetails => EmployeSelectionne != null;
 
     public void Charger()
     {
       var employes = _employeDataProvider.ChargerEmployes();
       var roles = _employeDataProvider.ChargerRoles();
-
 
       Employes.Clear();
       foreach (var employe in employes)

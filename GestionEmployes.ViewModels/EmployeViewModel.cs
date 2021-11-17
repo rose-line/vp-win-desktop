@@ -56,6 +56,19 @@ namespace GestionEmployes.ViewModels
       }
     }
 
+    public DateTime DateEmbaucheWPF
+    {
+      get => _employe.DateEmbauche.DateTime;
+      set
+      {
+        if (_employe.DateEmbauche != value)
+        {
+          _employe.DateEmbauche = value;
+          RaisePropertyChanged();
+        }
+      }
+    }
+
     public int RoleId
     {
       get => _employe.RoleId;
